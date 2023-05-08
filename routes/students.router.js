@@ -1,0 +1,33 @@
+import express from 'express';
+import StudentController from '../controller/student.controller.js';
+
+const router = express.Router();
+
+router.get('/', async (req, res) => {
+    try {
+      const students = await StudentController.getStudents();
+      res.status(200).send(students);
+    } catch (error) {
+      res.status(500).send("Failed to find items!");
+    }
+  });
+
+  router.get('/:id', async (req, res) => {
+    try {
+      const student = await StudentController.getStudentById(req.params.id);
+      res.status(200).send(student);
+    } catch (error) {
+      res.status(500).send("Failed to find item!");
+    }
+  });
+  
+  router.post('/', async (req, res) => {
+    try {
+      await StudentController.createStudent(req);
+      res.status(201).send();
+    } catch (error) {
+      res.status(500).send(error);
+    }
+  
+  });
+export default router;
