@@ -6,7 +6,7 @@ const router = express.Router();
 router.get('/', async (req, res) => {
     try {
       const students = await StudentController.getStudents();
-      res.status(200).send(students);
+      return res.status(200).send(students);
     } catch (error) {
       res.status(500).send("Failed to find items!");
     }
@@ -15,7 +15,7 @@ router.get('/', async (req, res) => {
   router.get('/:id', async (req, res) => {
     try {
       const student = await StudentController.getStudentById(req.params.id);
-      res.status(200).send(student);
+      return res.status(200).send(student);
     } catch (error) {
       res.status(500).send("Failed to find item!");
     }

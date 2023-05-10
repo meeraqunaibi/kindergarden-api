@@ -5,9 +5,10 @@ const router = express.Router();
 
 router.get("/", async (req, res) => {
   try {
-      const posts = await postController.getAllPosts();
-    res.status(200).send(posts);
+    const posts = await postController.getAllPosts();
+    return res.status(200).send(posts);
   } catch (error) {
+    console.error(error);
     res.status(500).send("Failed to find items!");
   }
 });
@@ -21,11 +22,12 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   try {
     await postController.createPost(req);
-    res.status(201).send();
+    return res.status(201).send();
   } catch (error) {
+    console.error(error);
     res.status(500).send("Failed to add item!");
   }
 });
@@ -33,7 +35,7 @@ router.post("/", async (req, res) => {
 router.put("/:id", async (req, res) => {
   try {
     await postController.editPost(req);
-    res.status(201).send();
+    return res.status(201).send();
   } catch (error) {
     res.status(500).send(error);
   }
@@ -41,8 +43,8 @@ router.put("/:id", async (req, res) => {
 
 router.delete("/:id", async (req, res) => {
   try {
-      await postController.deletePost(req);
-    res.status(201).send();
+    await postController.deletePost(req);
+    return res.status(201).send();
   } catch (error) {
     res.status(500).send("Failed to add item!");
   }

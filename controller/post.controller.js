@@ -13,9 +13,9 @@ const getAllPosts = async () => {
 
 // Create a new Post
 const createPost = async (req) => {
-  const post = new Post(req.body);
-  await post.save();
-  console.log(`Added Post ${post.title}`);
+  const post = new Post(req.body); 
+  // console.log(`Added Post ${post.title}`);
+  return await post.save();
 };
 
 const editPost = async (req) => {
