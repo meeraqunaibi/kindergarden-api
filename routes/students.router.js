@@ -21,10 +21,10 @@ router.get('/', async (req, res) => {
     }
   });
   
-  router.post('/', async (req, res) => {
+  router.post('/add', async (req, res) => {
     try {
-      await StudentController.createStudent(req);
-      res.status(201).send();
+       await StudentController.createStudent(req);
+      return res.status(201).send();
     } catch (error) {
       res.status(500).send(error);
     }
