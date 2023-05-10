@@ -1,15 +1,27 @@
 import mongoose from "mongoose";
 
 const ParentSchema = new mongoose.Schema({
-  fullName: {
+  motherName: {
     type: String,
     required: true,
   },
-  levelOfEdu: {
+  fatherName: {
     type: String,
     required: true,
   },
-  mobileNum: {
+  motherLevelOfEdu: {
+    type: String,
+    required: true,
+  },
+  fatherLevelOfEdu: {
+    type: String,
+    required: true,
+  },
+  motherMobileNum: {
+    type: String,
+    required: true,
+  },
+  fathermMobileNum: {
     type: String,
     required: true,
   },

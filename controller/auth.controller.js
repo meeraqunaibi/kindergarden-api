@@ -5,7 +5,7 @@ import jwt from "jsonwebtoken";
 const signIn = async (req, res) => {
   try {
     if (!req.body.username || !req.body.password) {
-      res.status(StatusCodes.BAD_REQUEST).json({
+      return res.status(StatusCodes.BAD_REQUEST).json({
         message: "Please enter email and password",
       });
     }
@@ -19,17 +19,17 @@ const signIn = async (req, res) => {
         { expiresIn: "30d" }
       );
       const { _id, email, password, role, profile } = user;
-      res.status(StatusCodes.OK).json({
+      return res.status(StatusCodes.OK).json({
         token,
         user: { _id, email, password, role, profile },
       });
     } else {
-      res.status(StatusCodes.BAD_REQUEST).json({
+      return res.status(StatusCodes.UNAUTHORIZED).json({
         message: "User does not exist..!",
       });
     }
   } catch (error) {
-    res.status(StatusCodes.BAD_REQUEST).json(error.message);
+    return res.status(StatusCodes.BAD_REQUEST).json(error.message);
   }
 };
 

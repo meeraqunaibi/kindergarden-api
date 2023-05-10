@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import mongoose  from 'mongoose';
 import studentRouter from './routes/students.router.js';
 import postRouter from './routes/posts.router.js';
@@ -6,7 +7,8 @@ import kindergartenFeedbackRouter from "./routes/kindergartenFeedback.router.js"
 import userRouter from "./routes/user.router.js"
 import authRouter from "./routes/auth.router.js"
 const app =  express();
-const port = process.env.PORT || 3000;
+const port = process.env.PORT | 3001;
+app.use(cors());
 app.use(express.json());
 app.use('/students', studentRouter);
 app.use('/posts', postRouter);

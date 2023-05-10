@@ -29,8 +29,9 @@ const getStudentById = async (StudentId) => {
 
 const createStudent = async (req) => {
   const student = new Student(req.body);
-  await student.save();
   console.log(`Added student ${student.fullName}`);
+  return await student.save();
+  
 };
 
 export default { createStudent, getStudents, getStudentById };
