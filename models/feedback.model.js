@@ -11,6 +11,13 @@ const FeedbackSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "student",
   },
+  staff: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Staff",
+  },
+  type:{
+    String
+  }
 });
 
 const Feedback = mongoose.model("Feedback", FeedbackSchema);
