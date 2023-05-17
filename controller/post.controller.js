@@ -7,7 +7,7 @@ const getAllPosts = async () => {
     const posts = await Post.find().sort({ date: -1 }).populate(
       {
         path: 'addedBy',
-        select: 'fullName'
+        select: 'username'
       });
     return posts;
   } catch (error) {
@@ -22,7 +22,7 @@ const createPost = async (req) => {
     content: req.body.content,
     date: req.body.date,
     levelOfEducation: req.body.levelOfEducation,
-    addedBy: req.body.addedBy,
+    // addedBy: req.body.addedBy,
   });
 
 

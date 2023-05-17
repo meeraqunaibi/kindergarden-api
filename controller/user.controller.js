@@ -5,11 +5,11 @@ import bcrypt from "bcrypt";
 
 // register new Student
 const signUp = async (req) => {
-  // const password = await bcrypt.hash(req.body.password, 10);
 
   const newUser = new User({
     username: req.body.copyOfIdCard,
-    password: "7853",
+    password: Math.floor(100000000 + Math.random() * 900000000)
+,
     role: "student",
     profile: req.body._id,
   });
