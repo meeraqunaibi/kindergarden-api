@@ -4,7 +4,11 @@ import Post from "../models/post.model.js";
 // Get all Posts
 const getAllPosts = async () => {
   try {
-    const posts = await Post.find().sort({ date: -1 });
+    const posts = await Post.find().sort({ date: -1 }).populate(
+      {
+        path: 'addedBy',
+        select: 'fullName'
+      });
     return posts;
   } catch (error) {
     console.error(err);
@@ -13,9 +17,19 @@ const getAllPosts = async () => {
 
 // Create a new Post
 const createPost = async (req) => {
-  const post = new Post(req.body); 
-  // console.log(`Added Post ${post.title}`);
-  return await post.save();
+  const newPost = new Post({
+    title: req.body.title,
+    content: req.body.content,
+    date: req.body.date,
+    levelOfEducation: req.body.levelOfEducation,
+    addedBy: req.body.addedBy,
+  });
+
+
+  return newPost.save()
+    .then(() => {
+      return true;
+    });
 };
 
 const editPost = async (req) => {

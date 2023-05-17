@@ -1,9 +1,12 @@
 import mongoose from "mongoose";
 import Student from "../models/student.model.js";
+import Parent from "../models/parent.model.js";
 
 const getStudents = async () => {
   try {
-    const students = await Student.find().sort("fullName");
+    const students = await Student.find().sort("fullName").populate(
+     { path: 'parent',
+    });
     return students;
   } catch (err) {
     console.error(err);
@@ -11,7 +14,10 @@ const getStudents = async () => {
 };
 
 const getStudentById = async (StudentId) => {
-  const StudentDoc = await Student.findById(StudentId);
+  const StudentDoc = await Student.findById(StudentId).populate(
+    {
+      path: 'parent',
+    });
 
   if (StudentDoc) {
     const student = {
@@ -20,6 +26,7 @@ const getStudentById = async (StudentId) => {
       levelOfEducation: StudentDoc.levelOfEducation,
       image: StudentDoc.image || "",
       teacher: StudentDoc.teacher,
+      parent:StudentDoc.parent
     };
 
     return student;
@@ -28,7 +35,10 @@ const getStudentById = async (StudentId) => {
 };
 
 const createStudent = async (req) => {
-  const student = new Student(req.body);
+  const parent = new Parent(req.body.parent);
+  const savedParent = await parent.save();
+  const student = new Student({ ...req.body, parent: savedParent._id});
+  console.log(req.body);
   console.log(`Added student ${student.fullName}`);
   return await student.save();
   

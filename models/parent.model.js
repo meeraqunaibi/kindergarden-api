@@ -30,8 +30,7 @@ const ParentSchema = new mongoose.Schema({
     required: true,
   },
   facebookProfileLink: {
-    type: String,
-    required: true,
+    type: String
   },
 });
 

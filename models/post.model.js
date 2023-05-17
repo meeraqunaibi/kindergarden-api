@@ -18,7 +18,7 @@ const PostSchema = new mongoose.Schema({
   },
   addedBy:{
     type: mongoose.Schema.Types.ObjectId,
-    ref: "staff",
+    ref: "User",
   }
 });
 

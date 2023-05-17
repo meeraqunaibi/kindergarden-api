@@ -22,13 +22,21 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-router.post("/add", async (req, res) => {
+// router.post("/add", async (req, res) => {
+//   try {
+//     await postController.createPost(req);
+//     return res.status(201).send();
+//   } catch (error) {
+//     console.error(error);
+//     res.status(500).send("Failed to add item!");
+//   }
+// });
+router.post("/add", async (req, res)=>{
   try {
     await postController.createPost(req);
-    return res.status(201).send();
+    res.status(201).send("item is added ");
   } catch (error) {
-    console.error(error);
-    res.status(500).send("Failed to add item!");
+    res.status(500).send("Failed to add 😭");
   }
 });
 

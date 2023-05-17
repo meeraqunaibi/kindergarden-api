@@ -12,7 +12,6 @@ const StudentSchema = new mongoose.Schema({
   },
   levelOfEducation: {
     type: String,
-    required: true,
   },
   bloodType: {
     type: String,
@@ -34,7 +33,7 @@ const StudentSchema = new mongoose.Schema({
   likeWatchingTV: Boolean,
   withWhomChildLive: String,
   description: String,
-  afterSchoolStudent: Boolean,
+  afterSchoolStudent: String,
   transportation: new mongoose.Schema({
     address: String,
     time_period: String,
@@ -56,16 +55,10 @@ const StudentSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: "staff",
   },
-  parent: [
-    {
+  parent: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "parent",
-    },
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "parent",
-    },
-  ],
+      ref: "Parent",
+  },
   feedback: String,
   disease: new mongoose.Schema({
     name: String,
@@ -73,6 +66,10 @@ const StudentSchema = new mongoose.Schema({
     treatmentName: String,
     moreDescription: String,
   }),
+  gender: {
+    type: Boolean,
+    required: true
+  }
 });
 
 const Student = mongoose.model("Student", StudentSchema);
