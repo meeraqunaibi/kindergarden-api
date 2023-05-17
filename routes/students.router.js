@@ -1,5 +1,6 @@
 import express from 'express';
 import StudentController from '../controller/student.controller.js';
+import studentController from '../controller/student.controller.js';
 
 const router = express.Router();
 
@@ -28,6 +29,14 @@ router.get('/', async (req, res) => {
     } catch (error) {
       res.status(500).send(error);
     }
-  
+  });
+
+  router.delete("/:id", async (req, res) => {
+    try {
+      await studentController.deleteStudent(req);
+      return res.status(201).send();
+    } catch (error) {
+      res.status(500).send("Failed to delete student!");
+    }
   });
 export default router;

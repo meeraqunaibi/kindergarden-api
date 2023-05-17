@@ -44,4 +44,10 @@ const createStudent = async (req) => {
   
 };
 
-export default { createStudent, getStudents, getStudentById };
+const deleteStudent = async (req) =>{
+  const student = await Student.findByIdAndRemove(req.params.id);
+
+  if (!student) return res.status(404).send('The student with the given ID was not found.');
+}
+
+export default { createStudent, getStudents, getStudentById, deleteStudent };

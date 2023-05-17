@@ -56,8 +56,8 @@ const StudentSchema = new mongoose.Schema({
     ref: "staff",
   },
   parent: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "Parent",
+    type: mongoose.Schema.Types.ObjectId,
+    ref: "Parent",
   },
   feedback: String,
   disease: new mongoose.Schema({
@@ -68,8 +68,9 @@ const StudentSchema = new mongoose.Schema({
   }),
   gender: {
     type: Boolean,
-    required: true
-  }
+    required: true,
+  },
+  confirm: Boolean,
 });
 
 const Student = mongoose.model("Student", StudentSchema);
