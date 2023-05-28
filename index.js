@@ -10,11 +10,13 @@ const app =  express();
 const port = process.env.PORT | 3001;
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({extended: true, limit: '20mb'}));
 app.use('/students', studentRouter);
-app.use('/posts', postRouter);
 app.use('/kindergartenFeedback', kindergartenFeedbackRouter);
+app.use('/posts', postRouter);
 app.use('/users', userRouter);
 app.use('/auth', authRouter);
+app.use('/images',express.static('./upload/images/'))
 
 
 

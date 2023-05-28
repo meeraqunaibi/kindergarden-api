@@ -10,7 +10,20 @@ const getAllFeedbacks = async () => {
     console.error(err);
   }
 };
-
+const getFeedback = async (req) => {
+  const studentId = req.params.id;
+  const feedbackId = req.params.id;
+  const feedDoc = await Feedback.findById(feedbackId, studentId);
+  if (feedDoc) {
+    const feedback = {
+      description: feedDoc.description,
+      createDate: feedDoc.createDate || "",
+      updateDate: feedDoc.updateDate || "",
+    }
+    return feedback;
+  }
+  return null;
+}
 // Create a new feedback
 const createFeedback = async (req) => {
   const feedback = new Feedback(req.body);
@@ -18,6 +31,14 @@ const createFeedback = async (req) => {
   console.log(`Added feedback ${feedback.description}`);
 };
 
-export default { getAllFeedbacks,
-     createFeedback 
-    };
+const getFeedbackForStudent = async (studentId) => {
+  console.log(studentId);
+  return await Feedback.find({ student: studentId }).populate('staff', 'username');
+};
+
+export default {
+  getAllFeedbacks,
+  createFeedback,
+  getFeedback,
+  getFeedbackForStudent
+};

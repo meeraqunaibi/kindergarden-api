@@ -9,11 +9,11 @@ const FeedbackSchema = new mongoose.Schema({
   updateDate: Date,
   student: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "student",
+    ref: "Student",
   },
   staff: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: "Staff",
+    ref: "User",
   },
   type:{
     String

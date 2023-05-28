@@ -1,20 +1,19 @@
 import mongoose from "mongoose";
 import User from "../models/user.model.js";
-import { StatusCodes, ReasonPhrases } from "http-status-codes";
-import bcrypt from "bcrypt";
+import Student from "../models/student.model.js";
 
 // register new Student
 const signUp = async (req) => {
-
   const newUser = new User({
     username: req.body.copyOfIdCard,
     password: Math.floor(100000000 + Math.random() * 900000000)
-,
+    ,
     role: "student",
     profile: req.body._id,
   });
-  console.log(newUser);
-  return newUser.save().then(() => {
+
+  return newUser.save().then(async () => {
+    await Student.findOneAndUpdate({ _id: req.body._id }, { confirm: 1 });
     return true;
   });
 
